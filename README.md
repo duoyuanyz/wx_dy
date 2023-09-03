@@ -1,122 +1,128 @@
-# wxcloudrun-springboot
-[![GitHub license](https://img.shields.io/github/license/WeixinCloud/wxcloudrun-express)](https://github.com/WeixinCloud/wxcloudrun-express)
-![GitHub package.json dependency version (prod)](https://img.shields.io/badge/maven-3.6.0-green)
-![GitHub package.json dependency version (prod)](https://img.shields.io/badge/jdk-11-green)
+### 项目说明
+- renren-security是一个轻量级的，前后端分离的Java快速开发平台，能快速开发项目并交付【接私活利器】
+- 采用SpringBoot、Shiro、MyBatis-Plus框架，开发的一套权限系统，极低门槛，拿来即用。设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。
+- 提供了代码生成器，只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
+- 支持MySQL、达梦、Oracle、SQL Server、PostgreSQL等主流数据库
+- 前端地址：https://gitee.com/renrenio/renren-ui
+- 演示地址：http://demo.open.renren.io/renren-security （账号密码：admin/admin）
 
-微信云托管 Java Springboot 框架模版，实现简单的计数器读写接口，使用云托管 MySQL 读写、记录计数值。
+<br>
 
-![](https://qcloudimg.tencent-cloud.cn/raw/be22992d297d1b9a1a5365e606276781.png)
+### 微信交流群
+我们提供了微信交流群，扫码下面的二维码，关注【人人开源】公众号，回复【加群】，即可根据提示加入微信群！
+<br><br>
+![输入图片说明](renren-admin/src/main/resources/public/wechat.jpg)
 
+<br>
 
-## 快速开始
-前往 [微信云托管快速开始页面](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/basic/guide.html)，选择相应语言的模板，根据引导完成部署。
+### 具有如下特点
+- 友好的代码结构及注释，便于阅读及二次开发
+- 实现前后端分离，通过token进行数据交互，前端再也不用关注后端技术
+- 灵活的权限控制，可控制到页面或按钮，满足绝大部分的权限需求
+- 提供CrudService接口，对增删改查进行封装，代码更简洁
+- 页面交互使用Vue2.x，极大的提高了开发效率
+- 完善的部门管理及数据权限，通过注解实现数据权限的控制
+- 完善的XSS防范及脚本过滤，彻底杜绝XSS攻击
+- 完善的代码生成机制，可在线生成entity、xml、dao、service、vue、sql代码，减少70%以上的开发任务
+- 引入quartz定时任务，可动态完成任务的添加、修改、删除、暂停、恢复及日志查看等功能
+- 引入Hibernate Validator校验框架，轻松实现后端校验
+- 引入云存储服务，已支持：七牛云、阿里云、腾讯云等
+- 引入swagger文档支持，方便编写API接口文档
 
-## 本地调试
-下载代码在本地调试，请参考[微信云托管本地调试指南](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/guide/debug/)。
+<br>
 
-## 实时开发
-代码变动时，不需要重新构建和启动容器，即可查看变动后的效果。请参考[微信云托管实时开发指南](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/guide/debug/dev.html)
+### 数据权限设计思想
+- 用户管理、角色管理、部门管理，可操作本部门及子部门数据
+- 菜单管理、定时任务、参数管理、字典管理、系统日志，没有数据权限
+- 业务功能，按照用户数据权限，查询、操作数据【没有本部门数据权限，也能查询本人数据】
 
-## Dockerfile最佳实践
-请参考[如何提高项目构建效率](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/scene/build/speed.html)
-
-## 目录结构说明
-~~~
-.
-├── Dockerfile                      Dockerfile 文件
-├── LICENSE                         LICENSE 文件
-├── README.md                       README 文件
-├── container.config.json           模板部署「服务设置」初始化配置（二开请忽略）
-├── mvnw                            mvnw 文件，处理mevan版本兼容问题
-├── mvnw.cmd                        mvnw.cmd 文件，处理mevan版本兼容问题
-├── pom.xml                         pom.xml文件
-├── settings.xml                    maven 配置文件
-├── springboot-cloudbaserun.iml     项目配置文件
-└── src                             源码目录
-    └── main                        源码主目录
-        ├── java                    业务逻辑目录
-        └── resources               资源文件目录
-~~~
+<br> 
 
 
-## 服务 API 文档
-
-### `GET /api/count`
-
-获取当前计数
-
-#### 请求参数
-
-无
-
-#### 响应结果
-
-- `code`：错误码
-- `data`：当前计数值
-
-##### 响应结果示例
-
-```json
-{
-  "code": 0,
-  "data": 42
-}
+**项目结构**
+```
+renren-security
+├─renren-common     公共模块
+│ 
+├─renren-admin      管理后台
+│    ├─db  数据库SQL脚本
+│    │ 
+│    ├─modules  模块
+│    │    ├─job 定时任务
+│    │    ├─log 日志管理
+│    │    ├─oss 文件存储
+│    │    ├─security 安全模块
+│    │    └─sys 系统管理(核心)
+│    │ 
+│    └─resources 
+│        ├─mapper   MyBatis文件
+│        ├─public  静态资源
+│        └─application.yml   全局配置文件
+│       
+│ 
+├─renren-api        API服务
+│ 
+├─renren-generator  代码生成器
+│        └─resources 
+│           ├─mapper   MyBatis文件
+│           ├─template 代码生成器模板（可增加或修改相应模板）
+│           ├─application.yml    全局配置文件
+│           └─generator.properties   代码生成器，配置文件
+│
 ```
 
-#### 调用示例
+<br>
 
-```
-curl https://<云托管服务域名>/api/count
-```
+**技术选型：**
+- 核心框架：Spring Boot 2.7
+- 安全框架：Apache Shiro 1.10
+- 持久层框架：MyBatis 3.5
+- 定时器：Quartz 2.3
+- 数据库连接池：Druid 1.2
+- 日志管理：Logback
+- 页面交互：Vue2.x
 
+<br>
 
-
-### `POST /api/count`
-
-更新计数，自增或者清零
-
-#### 请求参数
-
-- `action`：`string` 类型，枚举值
-  - 等于 `"inc"` 时，表示计数加一
-  - 等于 `"clear"` 时，表示计数重置（清零）
-
-##### 请求参数示例
-
-```
-{
-  "action": "inc"
-}
-```
-
-#### 响应结果
-
-- `code`：错误码
-- `data`：当前计数值
-
-##### 响应结果示例
-
-```json
-{
-  "code": 0,
-  "data": 42
-}
-```
-
-#### 调用示例
-
-```
-curl -X POST -H 'content-type: application/json' -d '{"action": "inc"}' https://<云托管服务域名>/api/count
-```
-
-## 使用注意
-如果不是通过微信云托管控制台部署模板代码，而是自行复制/下载模板代码后，手动新建一个服务并部署，需要在「服务设置」中补全以下环境变量，才可正常使用，否则会引发无法连接数据库，进而导致部署失败。
-- MYSQL_ADDRESS
-- MYSQL_PASSWORD
-- MYSQL_USERNAME
-以上三个变量的值请按实际情况填写。如果使用云托管内MySQL，可以在控制台MySQL页面获取相关信息。
+**软件需求**
+- JDK1.8
+- Maven3.0+
+- MySQL8.0
+- Oracle 11g+
+- SQL Server 2012+
+- PostgreSQL 9.4+
+- 达梦8
+<br>
 
 
-## License
+**本地部署**
+- 通过git下载源码
+- idea、eclipse需安装lombok插件，不然会提示找不到entity的get set方法
+- 创建数据库renren_security，数据库编码为UTF-8
+- 执行db/mysql.sql文件，初始化数据
+- 修改application-dev.yml文件，更新MySQL账号和密码
+- 在renren-security目录下，执行mvn clean install
+- Eclipse、IDEA运行AdminApplication.java，则可启动项目【renren-admin】
+- renren-admin访问路径：http://localhost:8080/renren-admin
+- swagger文档路径：http://localhost:8080/renren-admin/doc.html
+- 再启动前端项目，前端地址：https://gitee.com/renrenio/renren-ui
+- 账号密码：admin/admin
+<br>
 
-[MIT](./LICENSE)
+![输入图片说明](renren-admin/src/main/resources/public/1.png)
+
+<br>
+
+![输入图片说明](renren-admin/src/main/resources/public/2.png)
+
+<br>
+
+### 如何交流、反馈、参与贡献？
+- 开发文档：https://www.renren.io/guide/security
+- 官方社区：https://www.renren.io/community
+- Gitee仓库：https://gitee.com/renrenio/renren-security
+- [人人开源](https://www.renren.io)：https://www.renren.io
+- 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
+- 技术讨论、二次开发等咨询、问题和建议，请移步到官方社区，我会在第一时间进行解答和回复！
+<br>
+

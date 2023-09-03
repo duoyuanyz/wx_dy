@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.article.dao.ArticlePriceInfoDao">
+
+    <resultMap type="io.renren.modules.article.entity.ArticlePriceInfoEntity" id="articlePriceInfoMap">
+        <result property="id" column="id"/>
+        <result property="articleId" column="article_id"/>
+        <result property="price" column="price"/>
+        <result property="deleted" column="deleted"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+
+    <select id="getDataApp" resultType="io.renren.modules.article.vo.ArticlePriceInfoVo">
+        select
+            ai.id,ai.name,ap.price,left(ap.update_time,10) as date,substring(ap.update_time,12,5) as time,
+            ai.type
+        from article_info ai
+            left join (
+            select article_id,price,update_time from (
+            select article_id,price,update_time from article_price_info
+            where deleted=0
+            order by update_time desc limit 100000) t
+            group by t.article_id ) ap on ai.id=ap.article_id
+        where ai.deleted=0
+        order by ai.sort
+    </select>
+</mapper>
